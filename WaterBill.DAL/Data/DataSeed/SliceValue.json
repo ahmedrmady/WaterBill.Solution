@@ -1,0 +1,37 @@
+[
+  {
+    "Code": "1",
+    "Name": "أقل من 16",
+    "Condition": 15,
+    "WaterPrice": 0.1,
+    "SanitationPrice": 0.05
+  },
+  {
+    "Code": "2",
+    "Name": "من 16 - 30",
+    "Condition": 30,
+    "WaterPrice": 1,
+    "SanitationPrice": 0.5
+  },
+  {
+    "Code": "3",
+    "Name": "من 31 - 45",
+    "Condition": 45,
+    "WaterPrice": 3,
+    "SanitationPrice": 1.5
+  },
+  {
+    "Code": "4",
+    "Name": "من 46 - 60",
+    "Condition": 60,
+    "WaterPrice": 4,
+    "SanitationPrice": 2
+  },
+  {
+    "Code": "5",
+    "Name": "أكثر من 60",
+    "Condition": 60,
+    "WaterPrice": 6,
+    "SanitationPrice": 3
+  }
+]

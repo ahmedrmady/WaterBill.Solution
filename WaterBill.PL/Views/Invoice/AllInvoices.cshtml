@@ -1,0 +1,38 @@
+﻿
+@model List<SubscriptionToReturnDto>
+@{
+    ViewData["Title"] = "تقرير عن الفواتير";
+}
+
+<h1 class="text-center text-primary">تقرير عن الفواتير</h1>
+
+
+
+<div class="container">
+<table id="invoicesTable" class="table table-striped table-bordered  nowrap">
+    <thead class="thead-dark">
+        <tr>
+            <th class="text-center">إجمالي</th>
+            <th class="text-center">إجمالي الفاتورة</th>
+            <th class="text-center">مجموع الفاتورة</th>
+            <th class="text-center">كمية الاستهلاك</th>
+            <th class="text-center">الاستهلاك الحالية</th>
+            <th class="text-center">الاستهلاك السابقة</th>
+            <th class="text-center">تاريخ الفاتورة</th>
+            <th class="text-center">الاسم</th>
+            <th class="text-center">رقم المشترك</th>
+            <th class="text-center">رقم الاشتراك</th>
+            <th class="text-center">رقم الفاتورة</th>
+            <th class="text-center">م</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+</div>
+@section scripts {
+    <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+    <script src="~/lib/datatables/js/datatables.bootstrap4.min.js"></script>
+    <script src="~/js/InvoicesDataTable.js"></script>
+}

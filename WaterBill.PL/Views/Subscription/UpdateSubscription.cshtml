@@ -1,0 +1,152 @@
+﻿@model SubscriptionDto
+@inject IService<RrealEstateType> _rrealEstateService
+@{
+    ViewData["Title"] = "تحديث بيانات اشتراك";
+
+    //get the RrealEstate List
+    var RrealEstates = await _rrealEstateService.GetAllAsync();
+    var selectItems = new SelectList(RrealEstates, nameof(RrealEstateType.Code), nameof(RrealEstateType.Name));
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Id"  >:رقم الاشتراك</label>
+        <input asp-for="Id" id="subscriptionId" class="form-control" style="display: none;" />
+        <input id="displaySubscriptionId" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SubscriberCode">:رقم الهوية</label>
+        <input asp-for="SubscriberCode" class="form-control" oninput="checkInputLength()" />
+        <span asp-validation-for="SubscriberCode" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label >:الاسم</label>
+        <input id="Name" class="form-control" disabled />
+       
+    </div>
+
+    <div class="form-group">
+        <label >:المدينة</label>
+        <input id="City" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label >:الحي</label>
+        <input id="Area" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label >:رقم الهاتف</label>
+        <input id="Mobile" class="form-control" disabled />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UnitNo">:عدد الوحدات</label>
+        <input asp-for="UnitNo" class="form-control" />
+        <span asp-validation-for="UnitNo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RrealEstateTypesCode">:نوع العقار</label>
+        <select asp-for="RrealEstateTypesCode" class="form-control" asp-items="selectItems">
+            <option value="">اختر</option>
+        </select>
+        <span asp-validation-for="RrealEstateTypesCode" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="IsThereSanitation">:هل يوجد صرف صحي</label>
+        <select asp-for="IsThereSanitation" class="form-control">
+            <option value="">Select</option>
+            <option value="true"> يوجد</option>
+            <option value="false">لا يوجد</option>
+        </select>
+        <span asp-validation-for="IsThereSanitation" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">إنهاء</button>
+    <button type="submit" class="btn btn-primary">حفظ</button>
+</form>
+
+@section  ClintSideValidation{
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+<script>
+    
+    // Set the generated random number as the value of subscription id after the page has loaded
+    document.addEventListener("DOMContentLoaded", function () {
+        var subscriptionId = generateRandomNumber();
+        document.getElementById('subscriptionId').value = subscriptionId;
+        document.getElementById('displaySubscriptionId').value = subscriptionId;
+    });
+
+    function checkInputLength() {
+        var inputElement = document.getElementById("SubscriberCode");
+        var inputValue = inputElement.value;
+
+        if (inputValue.length === 10) {
+            // if the id is 10 char
+            console.log(inputValue)
+            getSubscriberById(inputValue);
+        }
+        clearSubscriberData()
+    }
+    function getSubscriberById(id) {
+
+        var url = `https://localhost:7256/Subscriber/GetSubscriberById?id=${id}`;
+
+        $.ajax({
+            method: 'GET',
+            url: url,
+            success: function (response) {
+                if (response != null) {
+                    console.log(response)
+                    setSubscriberData(response)
+
+                }
+
+            }
+        })
+
+    }
+
+    function setSubscriberData(subscriber) {
+        var name = document.getElementById("Name");
+        var city = document.getElementById("City");
+        var area = document.getElementById("Area");
+        var mobile = document.getElementById("Mobile");
+
+        name.value = subscriber.name
+        city.value = subscriber.city
+        area.value = subscriber.area
+        mobile.value = subscriber.mobile
+
+
+    }
+
+    function clearSubscriberData() { 
+        var name = document.getElementById("Name");
+        var city = document.getElementById("City");
+        var area = document.getElementById("Area");
+        var mobile = document.getElementById("Mobile");
+
+        name.value = ''
+        city.value = ''
+        area.value = ''
+        mobile.value = ''
+
+    }
+
+    function generateRandomNumber() {
+        var firstPart = 23;  
+        var secondPart = Math.floor(Math.random() * 10) + 1;
+        var thirdPart = Math.floor(Math.random() * 100) + 1;
+        return `${firstPart}-${secondPart}-${thirdPart}`;
+    }
+
+   
+</script>

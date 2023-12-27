@@ -1,0 +1,235 @@
+﻿
+@model InvoiceDto
+@{
+    ViewData["Title"] = "تسجيل فاتورة ";
+}
+
+<h1>تسجيل فاتورة جديدة</h1>
+
+
+
+ 
+<div class="container mt-4">
+  
+    <form  method="post">
+
+        @* Invoice Number and date *@
+        <div class="row text-right">
+            
+            
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Date">:تاريخ الفاتورة</label>
+                    <input asp-for="Date" type="date" value="2023-01-01" class="form-control" />
+                </div>
+                <input asp-for="Year" type="date" class="form-control" style="display: none;" />
+                <input asp-for="RrealEstateTypeCode"   class="form-control" style="display: none;" />
+              
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group text-right">
+                    <label asp-for="Id">:رقم الفاتورة</label>
+                    <input asp-for="Id"  class="form-control" style="display: none;" />
+
+                    <input id="invoiceId" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+
+        @* Invoice date from => to  *@
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="From">:من تاريخ</label>
+                    <input asp-for="From" type="date" value="2023-12-01" class="form-control" />
+                </div>
+              
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="To">:إلى تاريخ</label>
+                    <input asp-for="To" class="form-control" style="display: none;" />
+
+                    <input id="ToPublic" type="date" value="2023-12-01" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="SubscriptionId">:رقم الاشتراك</label>
+                    <input asp-for="SubscriptionId" class="form-control" oninput="checkInputLength()" />
+                </div>
+
+            </div>
+            
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="SubscriberName">: الاسم</label>
+                    <input asp-for="SubscriberName" class="form-control" style="display: none;" />
+
+                    <input id="SubscriberNamePublic" class="form-control" disabled />
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="SubscriberId">:هوية المشترك</label>
+                    <input asp-for="SubscriberId" class="form-control" style="display: none;" />
+                    <input id="SubscriberIdPublic" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="CurrentConsumptionAmount">: القراءةالحالية</label>
+                    <input asp-for="CurrentConsumptionAmount" style="display: none;" />
+                    <input id="CurrentConsumptionAmountPublic" class="form-control"  />
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="PreviousConsumptionAmount">:القراءة السابقة</label>
+                    <input asp-for="PreviousConsumptionAmount" class="form-control" style="display: none;" />
+                    <input id="PreviousConsumptionAmountPublic" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-left">
+            
+            <div class="col-md-6 ">
+                <div class="form-group">
+                    <label asp-for="AmountConsumption">:كمية الاستهلاك</label>
+                    <input asp-for="AmountConsumption" class="form-control" style="display: none;" />
+                    <input id="AmountConsumptionPublic" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+
+
+
+        
+
+
+
+        @****************@
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="UnitNo">: عدد الوحدات</label>
+                    <input asp-for="UnitNo" class="form-control" style="display: none;" />
+                    <input id="UnitNoPublic" class="form-control" disabled />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="IsThereSanitation">:هل يوجد صرف صحي</label>
+                    <input asp-for="IsThereSanitation" class="form-control"  style="display: none;" />
+                    <input id="isThereSanitationInput" class="form-control"  disabled />
+                </div>
+            </div>
+        </div>
+        @****************@
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="TaxRate">:نسبة الضريبة</label>
+                    <input asp-for="TaxRate" class="form-control"  />
+                    <input asp-for="TaxValue" class="form-control" style="display: none;"  />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ServiceFee">:قيمة رسوم الخدمة</label>
+                    <input asp-for="ServiceFee" class="form-control"  />
+                </div>
+            </div>
+        </div>
+        @****************@
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="WastewaterConsumptionValue">: قيمةإستهلاك الصرف الصحي</label>
+                    <input asp-for="WastewaterConsumptionValue" class="form-control" style="display: none;" />
+                    <input id="WastewaterConsumptionValuePublic" class="form-control" disabled />
+                </div>
+            </div>
+       
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="ConsumptionValue">:قيمةاستهلاك المياه </label>
+                    <input asp-for="ConsumptionValue" class="form-control" style="display: none;" />
+                    <input id="ConsumptionValuePublic" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+        @****************@
+
+        @****************@
+        
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="TotalBill">: إجمالي الفاتورة</label>
+                    <input asp-for="TotalBill" class="form-control" style="display: none;"  />
+                    <input id="TotalBillPublic" class="form-control" disabled />
+                </div>
+            </div>
+        
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="TotalInvoice">:قيمةالفاتورة </label>
+                    <input asp-for="TotalInvoice" class="form-control" style="display: none;" />
+                    <input id="TotalInvoicePublic" class="form-control" disabled />
+                </div>
+            </div>
+        </div>
+        @****************@
+
+
+
+        <div class="row text-center">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    
+        <button  class="btn btn-primary" asp-controller="Home" asp-action="Index">إنهاء</button>
+        <button type="submit" class="btn btn-primary">حفظ</button>
+                </div>
+            </div>
+
+            
+        </div>
+        @****************@
+
+
+    </form>
+</div> 
+@section  ClintSideValidation{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/createnewinvoice.js"></script>
+<script src="~/js/createinvoice.js"></script>
+}
+
+
+

@@ -1,0 +1,42 @@
+[
+  {
+    "Id": "23-5-100",
+    "SubscriberCode": "1028907684",
+    "RrealEstateTypesCode": "5",
+    "UnitNo": 1,
+    "IsThereSanitation": false,
+    "LastReadingMeter": 106401
+  },
+  {
+    "Id": "23-4-89",
+    "SubscriberCode": "1011438566",
+    "RrealEstateTypesCode": "4",
+    "UnitNo": 1,
+    "IsThereSanitation": false,
+    "LastReadingMeter": 106730
+  },
+  {
+    "Id": "23-5-101",
+    "SubscriberCode": "1023911944",
+    "RrealEstateTypesCode": "5",
+    "UnitNo": 6,
+    "IsThereSanitation": true,
+    "LastReadingMeter": 105213
+  },
+  {
+    "Id": "23-5-102",
+    "SubscriberCode": "1028115669",
+    "RrealEstateTypesCode": "5",
+    "UnitNo": 2,
+    "IsThereSanitation": true,
+    "LastReadingMeter": 105599
+  },
+  {
+    "Id": "23-2-44",
+    "SubscriberCode": "1027199446",
+    "RrealEstateTypesCode": "2",
+    "UnitNo": 4,
+    "IsThereSanitation": false,
+    "LastReadingMeter": 106418
+  }
+]

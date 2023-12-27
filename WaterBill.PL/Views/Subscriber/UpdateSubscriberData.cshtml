@@ -1,0 +1,53 @@
+﻿@model SubscriberDto
+
+@{
+    ViewData["Title"] = "تحديث بيانات مشترك";
+}
+
+<h2>تحديث بيانات مشترك</h2>
+
+<form  method="post">
+    <div class="form-group">
+        <label asp-for="Id">:رقم الهوية</label>
+        <input asp-for="Id" class="form-control" oninput="checkInputLength()" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name">:الاسم</label>
+        <input asp-for="Name" class="form-control"  />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City">:المدينة</label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Area">: الحي</label>
+        <input asp-for="Area" class="form-control" />
+        <span asp-validation-for="Area" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Mobile">: رقم الجوال</label>
+        <input asp-for="Mobile" class="form-control" />
+        <span asp-validation-for="Mobile" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">إنهاء</button>
+        <button type="submit" class="btn btn-primary">حفظ</button>
+    </div>
+   
+</form>
+
+@section  ClintSideValidation{
+
+    <partial name="_ValidationScriptsPartial" />
+
+<script src="~/js/getsubscriberdata.js"></script>
+}
+
